@@ -1,0 +1,111 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar ocupa un ancho fijo */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #2e7d32, #66bb6a);
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 12px;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  background-color: #fff8e1; /* tono crema */
+  padding: 25px;
+}
+
+/* Barra superior */
+.top-bar {
+  width: 100%;
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.top-bar h1 {
+  font-size: 24px;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+/* Barra superior blanca integrada */
+.top-bar {
+  width: 96%;
+  height: 70px;
+  background-color: #fbfaf9; /* blanco sólido */
+  border-bottom: 2px solid #e0e0e0; /* línea gris suave */
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative; /* ya no fixed */
+  z-index: 10;
+}
+
+.top-bar h2 {
+  color: #2e7d32;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Contenedor principal */
+.main-content {
+  flex: 1;
+  background-color: #fff8e1;
+  padding: 0; /* sin padding arriba */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenido debajo de la barra */
+.content-wrapper {
+  padding: 25px;
+  background-color: #fff8e1;
+  flex: 1;
+}
+
+
+
+

@@ -1,0 +1,27 @@
+.module-view {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.module-view h2 {
+    color: #2b8b30;
+    margin-bottom: 15px;
+}
+
+.module-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.module-view th, .module-view td {
+    border: 1px solid #d1cdcd;
+    padding: 10px;
+    text-align: center;
+}
+
+.module-view th {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}

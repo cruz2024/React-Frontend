@@ -1,0 +1,127 @@
+/* Contenedor principal de Ingreso */
+.ingreso-container {
+  background: #f4f4f4;   /* Fondo gris claro */
+  padding: 20px;
+  border-radius: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado de Ingreso */
+.ingreso-header {
+  background: #1565c0;   /* Azul para diferenciar de Egreso */
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingreso-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.ingreso-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* Botón nuevo ingreso */
+.btn-nuevo-ingreso {
+  background: #215080;   /* Azul claro */
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.btn-nuevo-ingreso:hover {
+  background: #0d47a1;   /* Azul más oscuro */
+}
+
+/* Tabla de ingresos */
+.tabla-ingreso {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+.tabla-ingreso th {
+  background: #1565c0;   /* Azul */
+  color: #fff;
+  padding: 12px;
+  text-align: left;
+}
+.tabla-ingreso td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Botones de acción */
+.btn-editar-ingreso {
+  background: #1565c0;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.btn-editar-ingreso:hover {
+  background: #0d47a1;
+}
+.btn-eliminar-ingreso {
+  background: #c62828;   /* Rojo */
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-eliminar-ingreso:hover {
+  background: #8e0000;
+}
+
+/* Modal de ingreso */
+.modal-ingreso {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex; justify-content: center; align-items: center;
+}
+.modal-ingreso-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 420px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+.modal-ingreso-content h3 {
+  margin-top: 0;
+  color: #1565c0;
+}
+.modal-ingreso-content form {
+  display: flex;
+  flex-direction: column;
+}
+.modal-ingreso-content input {
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.modal-ingreso-content button[type="submit"] {
+  background: #1565c0;
+  color: #fff;
+}
+.modal-ingreso-content button[type="button"] {
+  background: #444;
+  color: #fff;
+}

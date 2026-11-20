@@ -1,110 +1,110 @@
 import React, { useState, useEffect } from "react";
-import "../styles/IngresoView.css";
+import "../styles/IngresoView.css"; // Importa estilos exclusivos
 
 export default function IngresoView() {
-    const [ingresos, setIngresos] = useState([]);
-    const [showForm, setShowForm] = useState(false);
-    const [editingIngreso, setEditingIngreso] = useState(null);
-    const [formData, setFormData] = useState({ nombre: "", cantidad: "", fecha: "" });
+  const [ingresos, setIngresos] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editingIngreso, setEditingIngreso] = useState(null);
+  const [formData, setFormData] = useState({
+    categoria: "",
+    producto_servicio: "",
+    cantidad: "",
+    monto: "",
+    fecha: "",
+    descripcion: ""
+  });
 
-  // Cargar ingresos
-    useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:8080/api/ingreso")
-    .then(res => res.json())
-    .then(data => setIngresos(data));
-}, []);
+      .then(res => res.json())
+      .then(setIngresos)
+      .catch(console.error);
+  }, []);
 
-    const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (editingIngreso) {
-      // Actualizar
-    fetch(`http://localhost:8080/api/ingreso/${editingIngreso.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-    })
-        .then(res => res.json())
-        .then(data => {
-        setIngresos(ingresos.map(i => i.id === data.id ? data : i));
-        setEditingIngreso(null);
-        setShowForm(false);
-        });
-    } else {
-      // Crear nuevo
-    fetch("http://localhost:8080/api/ingreso", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-    })
-        .then(res => res.json())
-        .then(data => {
-        setIngresos([...ingresos, data]);
-        setShowForm(false);
-        });
-    }
-    setFormData({ nombre: "", cantidad: "", fecha: "" });
-};
+    const method = editingIngreso ? "PUT" : "POST";
+    const url = editingIngreso
+      ? `http://localhost:8080/api/ingreso/${editingIngreso.id}`
+      : "http://localhost:8080/api/ingreso";
 
-    const handleEdit = (ingreso) => {
-    setEditingIngreso(ingreso);
-    setFormData({ nombre: ingreso.nombre, cantidad: ingreso.cantidad, fecha: ingreso.fecha });
-    setShowForm(true);
-    };
+    const res = await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+    const data = await res.json();
 
-    const handleDelete = (id) => {
+    setIngresos(editingIngreso
+      ? ingresos.map(i => (i.id === data.id ? data : i))
+      : [...ingresos, data]);
+
+    setShowForm(false);
+    setEditingIngreso(null);
+    setFormData({
+      categoria: "",
+      producto_servicio: "",
+      cantidad: "",
+      monto: "",
+      fecha: "",
+      descripcion: ""
+    });
+  };
+
+  const handleDelete = id =>
     fetch(`http://localhost:8080/api/ingreso/${id}`, { method: "DELETE" })
-    .then(() => setIngresos(ingresos.filter(i => i.id !== id)));
-};
+      .then(() => setIngresos(ingresos.filter(i => i.id !== id)));
 
-    return (
+  return (
     <div className="ingreso-container">
-    <div className="ingreso-header">
-        <h2>Gestión de Ingresos</h2>
-        <button className="btn-nuevo" onClick={() => { setShowForm(true); setEditingIngreso(null); }}>
-        + Nuevo Ingreso
+      <div className="ingreso-header">
+        <h2>Ingreso</h2>
+        <button className="btn-nuevo-ingreso" onClick={() => { setShowForm(true); setEditingIngreso(null); }}>
+          + Nuevo registro
         </button>
-    </div>
+      </div>
 
-    <table className="tabla-ingresos">
+      <table className="tabla-ingreso">
         <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-        </tr>
+          <tr>
+            <th>ID</th><th>Categoría</th><th>Producto/Servicio</th>
+            <th>Cantidad</th><th>Monto (C$)</th><th>Fecha</th><th>Descripción</th><th>Acciones</th>
+          </tr>
         </thead>
         <tbody>
-        {ingresos.map((i) => (
+          {ingresos.map(i => (
             <tr key={i.id}>
-            <td>{i.nombre}</td>
-            <td>{i.cantidad}</td>
-            <td>{i.fecha}</td>
-            <td>
-                <button onClick={() => handleEdit(i)}>✏️ Editar</button>
-                <button onClick={() => handleDelete(i.id)}>🗑️ Eliminar</button>
-            </td>
+              <td>{i.id}</td><td>{i.categoria}</td><td>{i.producto_servicio}</td>
+              <td>{i.cantidad}</td><td>C${i.monto}</td><td>{i.fecha}</td><td>{i.descripcion}</td>
+              <td>
+                <button className="btn-editar-ingreso" onClick={() => { setEditingIngreso(i); setFormData(i); setShowForm(true); }}>✏️</button>
+                <button className="btn-eliminar-ingreso" onClick={() => handleDelete(i.id)}>🤔</button>
+              </td>
             </tr>
-        ))}
+          ))}
         </tbody>
-    </table>
+      </table>
 
-    {showForm && (
-        <div className="modal">
-        <div className="modal-content">
+      {showForm && (
+        <div className="modal-ingreso">
+          <div className="modal-ingreso-content">
             <h3>{editingIngreso ? "Editar Ingreso" : "Nuevo Ingreso"}</h3>
             <form onSubmit={handleSubmit}>
-            <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
-            <input type="number" name="cantidad" placeholder="Cantidad" value={formData.cantidad} onChange={handleChange} />
-            <input type="date" name="fecha" value={formData.fecha} onChange={handleChange} />
-            <button type="submit">{editingIngreso ? "Actualizar" : "Guardar"}</button>
-            <button type="button" onClick={() => setShowForm(false)}>Cancelar</button>
+              <input type="text" name="categoria" placeholder="Categoría" value={formData.categoria} onChange={handleChange} required />
+              <input type="text" name="producto_servicio" placeholder="Producto/Servicio" value={formData.producto_servicio} onChange={handleChange} required />
+              <input type="number" name="cantidad" placeholder="Cantidad" value={formData.cantidad} onChange={handleChange} required min="1" />
+              <input type="number" name="monto" placeholder="Monto (C$)" value={formData.monto} onChange={handleChange} required min="1" />
+              <input type="date" name="fecha" value={formData.fecha} onChange={handleChange} required />
+              <input type="text" name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleChange} required />
+              <button type="submit">{editingIngreso ? "Actualizar" : "Guardar"}</button>
+              <button type="button" onClick={() => setShowForm(false)}>Cancelar</button>
             </form>
+          </div>
         </div>
-        </div>
-    )}
+      )}
     </div>
-    );
+  );
 }

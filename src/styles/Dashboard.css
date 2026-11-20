@@ -1,44 +1,88 @@
+/* Fondo general */
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: #ffffff; /* Blanco */
-    color: #000; /* Negro */
+  background-color: #fff8e1; /* Aqui es el fondo de un color creama para todo el dashboard o secciones */
+    min-height: 100vh; /** Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+    padding: 25px; /** Espaciado interno para que el contenido no toque los bordes */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /** Fuente legible y moderna */
 }
 
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #008000; /* Verde */
-    color: #ffffff;
-    padding: 15px;
+/* Aqui es el titulo */
+.dashboard-container h2 {
+    color: #0f7e15; /** Color verde oscuro para el título */
+    font-size: 28px; /** Tamaño de fuente más grande para destacar */
+    font-weight: 600; /** Peso de fuente semi-negrita para resaltar */
+    margin-bottom: 20px; /** Espacio debajo del título para separar del contenido */
 }
 
-.dashboard-sidebar {
-    width: 200px;
-    background: #ffffff;
-    border-right: 1px solid #000;
-    padding: 10px;
+/* Aqui es estan las targeta superiores */
+.cards {
+    display: flex; /** Utiliza flexbox para alinear las tarjetas horizontalmente */
+    flex-wrap: wrap; /** Permite que las tarjetas se ajusten a la siguiente línea si no caben en una sola */
+    gap: 15px; /** Espacio de 15px entre las tarjetas para que no se vean amontonadas */
+    margin-bottom: 25px; /** Espacio debajo de las tarjetas para separar del resto del contenido */
 }
 
-.dashboard-sidebar ul {
-    list-style: none;
-    padding: 0;
+
+/** Aqui esta el diseño individual de cada tarjeta */
+.card {
+    flex: 1; /** Permite que cada tarjeta ocupe un espacio proporcional dentro del contenedor */
+    min-width: 220px; /** Asegura que las tarjetas no se hagan demasiado pequeñas en pantallas más estrechas */
+    background: #ffffff; /** Fondo blanco para las tarjetas */
+    padding: 18px; /** Espaciado interno para que el contenido no toque los bordes */
+    border-radius: 12px; /** Bordes redondeados para un diseño más moderno */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /** Sombra sutil para dar profundidad y destacar las tarjetas */
+    display: flex; /** Utiliza flexbox para alinear el contenido dentro de la tarjeta */
+    font-weight: 600; /** Peso de fuente semi-negrita para resaltar el contenido */
+    display: flex; /** Utiliza flexbox para alinear el contenido dentro de la tarjeta */
+    align-items: center; /** Centra verticalmente el contenido dentro de la tarjeta */
+    justify-content: center; /** Centra horizontalmente el contenido dentro de la tarjeta */
+    color: #333; /** Color de texto gris oscuro para buena legibilidad */
 }
 
-.dashboard-sidebar li {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #000;
+/* Aqui tengo las variante Colores de tarjetas */
+.card.green {
+    border-top: 5px solid #2e7d32; /** Color verde oscuro para la parte superior de la tarjeta */
+    color: #2e7d32; /** Color de texto verde oscuro para mantener la coherencia con el borde */
 }
 
-.dashboard-sidebar li:hover {
-    background: #008000;
-    color: #ffffff;
+.card.red {
+    border-top: 5px solid #c62828; /** Color rojo oscuro para la parte superior de la tarjeta */
+    color: #c62828; /** Color de texto rojo oscuro para mantener la coherencia con el borde */
 }
 
-.dashboard-content {
-    flex: 1;
-    padding: 20px;
+.card.neutral {
+    border-top: 5px solid #1565c0; /** Color azul oscuro para la parte superior de la tarjeta */
+    color: #1565c0; /** Color de texto azul oscuro para mantener la coherencia con el borde */
+}
+
+/* El Gráficos */
+.charts {
+    display: flex; /** Utiliza flexbox para alinear los gráficos horizontalmente */
+    flex-wrap: wrap; /** Permite que los gráficos se ajusten a la siguiente línea si no caben en una sola */
+    gap: 20px; /** Espacio de 20px entre los gráficos para que no se vean amontonados */
+}
+
+
+/** Aquin esta el diseño individual de cada gráfico */
+.chart {
+    flex: 1; /** Permite que cada gráfico ocupe un espacio proporcional dentro del contenedor */
+    min-width: 400px; /** Asegura que los gráficos no se hagan demasiado pequeños en pantallas más estrechas */
+    background: #ffffff; /** Fondo blanco para los gráficos */
+    padding: 20px; /** Espaciado interno para que el contenido no toque los bordes */
+    border-radius: 12px; /** Bordes redondeados para un diseño más moderno */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /** Sombra sutil para dar profundidad y destacar los gráficos */
+}
+
+.chart h3 {
+    color: #2e7d32; /** Color verde oscuro para el título del gráfico */
+    font-weight: 600; /** Peso de fuente semi-negrita para resaltar el título */
+    margin-bottom: 10px; /** Espacio debajo del título para separar del gráfico */
+}
+
+/* Texto de “No hay datos disponibles” */
+.chart p {
+    color: #838481; /** Color gris para el texto de aviso */
+    font-style: italic; /** Estilo de fuente cursiva para diferenciarlo del contenido principal */
+    text-align: center; /** Centra el texto dentro del contenedor del gráfico */
+    margin-top: 40px; /** Espacio superior para separar del gráfico y hacerlo más visible */
 }
